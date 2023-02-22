@@ -1,4 +1,4 @@
 <x-layouts.admin title="Админка | главная">
-<h2>Админка</h2>
-
+<h3>Админка</h3>
+    <a href="https://github.com/Alexart21/test.laravel" target="_blank">GitHub</a>
 </x-layouts.admin>
