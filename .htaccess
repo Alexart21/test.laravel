@@ -1,0 +1,17 @@
+#test deploy2
+#php_value error_reporting E_ALL
+#php_value error_reporting 0
+#php_value date.timezone 'Europe/Moscow'
+# Без этого google reCapcha не хочит
+#php_flag allow_url_fopen on
+
+RewriteEngine on
+# redirect from https://
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# redirect с www на без www
+RewriteCond %{HTTP_HOST} ^www\.(.*)$
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+RewriteRule (.*) /public/$1
