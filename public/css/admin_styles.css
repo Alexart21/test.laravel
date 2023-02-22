@@ -1,0 +1,8 @@
+.admin_tbl th{
+    background: #eee;
+}
+
+.admin_tbl td, .admin_tbl th{
+    padding: 1em;
+    border: 1px solid #222;
+}

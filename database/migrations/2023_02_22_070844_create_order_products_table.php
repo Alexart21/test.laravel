@@ -19,8 +19,8 @@ return new class extends Migration
             $table->float('price');
             $table->integer('qty');
             $table->float('total');
-            $table->foreignIdFor(Order::class)->constrained();
-            $table->foreignIdFor(Product::class)->constrained();
+            $table->foreignIdFor(Order::class);
+            $table->foreignIdFor(Product::class);
             $table->timestamps();
         });
     }

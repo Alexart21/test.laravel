@@ -9,11 +9,14 @@ use App\Http\Requests\Admin\ProductFormRequest;
 
 class ProductsController extends Controller
 {
-    const PAGE_SIZE = 20;
+    const PAGE_SIZE = 10;
+
     public function index()
     {
         $products = Product::orderByDesc('title')->paginate(self::PAGE_SIZE);
-        return view('admin.products.index', compact('products'));
+        $count = $products->count();
+        $total = $products->total();
+        return view('admin.products.index', compact('products', 'count', 'total'));
     }
 
     /**
@@ -49,15 +52,21 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductFormRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $product = Product::findOrFail($id);
+        $product->update($data);
+        flash('Обновлено !')->success();
+
+        return redirect()->route('products.show', [$id]);
     }
 
     /**
@@ -65,6 +74,9 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 }

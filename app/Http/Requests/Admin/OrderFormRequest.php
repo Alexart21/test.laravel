@@ -6,12 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class OrderFormRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +20,18 @@ class OrderFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+//           'date' => 'required|string|max:10|regex:/(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).(20\d\d)/',
+           'date' => 'required|string|max:10|',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'address' => 'required|max:255'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'date' => 'Введите корректную дату',
         ];
     }
 }

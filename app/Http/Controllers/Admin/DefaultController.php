@@ -11,4 +11,9 @@ class DefaultController extends Controller
     {
         return view('admin.index');
     }
+
+    public function api()
+    {
+        return view('admin.api');
+    }
 }

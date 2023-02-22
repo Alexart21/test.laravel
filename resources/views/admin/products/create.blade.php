@@ -9,10 +9,16 @@
     </div>
 
     <div class="form-group">
-        <label for="">Цена</label>
-        <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" value="{{ old('price') }}">
+        <label for="">Цена вида 100.35</label>
+        <input id="price" pattern="^\d+(\.\d\d)?$" class="form-control @error('price') is-invalid @enderror" type="text" name="price" value="{{ old('price') }}">
         @error('price')<div class="text-danger">{{ $message }}</div>@enderror
     </div>
-    <button>отправить</button>
+    <button class="btn btn-success">Отправить</button>
 </form>
+    <script>
+        window.onload = () => {
+            // console.log('here');
+            // $("#price").mask('99?999.?99');
+        }
+    </script>
 </x-layouts.admin>
