@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ProductFormRequest;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    const PAGE_SIZE = 20;
     public function index()
     {
-        //
+        $products = Product::orderByDesc('title')->paginate(self::PAGE_SIZE);
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -20,15 +21,18 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductFormRequest $request)
     {
-        //
+        $data = $request->validated();
+        $product =  Product::create($data);
+        return redirect()->route('products.show', [$product->id]);
+
     }
 
     /**
@@ -36,7 +40,8 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.products.show', compact('product'));
     }
 
     /**

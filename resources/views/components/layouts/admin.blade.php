@@ -10,8 +10,11 @@
     <link rel="icon" type="image/png" href="{{ asset('icons/512x512.png')  }}"/>
     <link rel="stylesheet" href="{{ asset('css/bootstrap5.min.css') }}">
 <body>
-<div class="container admin-main">
-    {{ $slot }}
+<div class="container d-flex">
+    <x-main.left />
+    <div>
+        {{ $slot }}
+    </div>
 </div>
 <script></script>
 </body>

@@ -6,5 +6,9 @@ use App\Http\Controllers\Admin\OrdersController;
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'can:admin']], function (){
+
     Route::get('/', [ DefaultController::class, 'index' ])->name('admin.index');
+
+    Route::resource('/products', ProductsController::class)->parameters('id')->whereNumber(['id']);
+    Route::resource('/orders', OrdersController::class)->parameters('id')->whereNumber(['id']);
 });
