@@ -9,6 +9,7 @@
                 <th>Телефон</th>
                 <th>Email</th>
                 <th>Адрес</th>
+                <th>Сумма</th>
                 <th></th>
             </tr>
         @foreach($orders as $order)
@@ -18,6 +19,7 @@
                 <td>{{ $order->phone }}</td>
                 <td>{{ $order->email }}</td>
                 <td>{{ $order->address }}</td>
+                <td>{{ $order->total }}</td>
                 <td>
                     <a href="{{ route('orders.show', [ $order->id ]) }}" class="btn btn-success">показать</a>
                     <a href="{{ route('orders.edit', [ $order->id ]) }}" class="btn btn-success">редактировать</a>

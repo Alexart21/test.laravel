@@ -26,6 +26,7 @@ Route::group([
     Route::post('me', [ AuthController::class, 'me' ]);
 
     Route::post('orders', [ OrderApiControllers::class, 'orders' ]);
+    Route::post('page', [ OrderApiControllers::class, 'page' ]);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

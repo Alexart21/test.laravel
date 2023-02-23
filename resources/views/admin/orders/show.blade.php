@@ -18,13 +18,13 @@
             <td>{{ $order->phone }}</td>
             <td>{{ $order->email }}</td>
             <td>{{ $order->address}}</td>
-            @if($order->total)
+            @if($order->total > 0)
             <td>{{ $order->total }}</td>
             @endif
         </tr>
     </table>
     <br>
-    @if(!$order->total)
+    @if($order->total <= 0)
         <h4>Товаров в заказе нет</h4>
         <form action="{{ route('orders.delete', [$order->id]) }}" method="post">
             @csrf

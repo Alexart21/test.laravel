@@ -26,4 +26,15 @@ class OrderApiControllers extends Controller
         ]);
     }
 
+    public function page(Request $request)
+    {
+        $pageNum = $request->pageNum;
+        $page_size = $request->page_size;
+        // получаем данные по номеру страницы
+        $orders = Order::orderByDesc('date')->paginate($page_size, ['*'], 'page', $pageNum);
+        return response()->json([
+            'orders'=> $orders,
+        ]);
+    }
+
 }
