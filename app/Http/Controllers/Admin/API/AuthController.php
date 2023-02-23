@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Admin\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -59,6 +59,13 @@ class AuthController extends Controller
     {
         return response()->json(auth()->user());
     }
+
+    /*public function orders()
+    {
+        return response()->json([
+            'test'=> true
+        ]);
+    }*/
 
     /**
      * Log the user out (Invalidate the token).

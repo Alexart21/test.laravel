@@ -76,13 +76,8 @@ class OrdersController extends Controller
             'product' => 'required|string|max:255',
             'qty' => 'required|integer'
         ]);
-//        dump($data);
         $product = Product::where('title', $data['product'])->firstOrFail();
-//        dump($product);
         $order = Order::findOrFail($data['order_id']);
-//        dump($order);
-//        die;
-
 
         $orderProduct = new OrderProduct();
         $orderProduct->title = $product->title;

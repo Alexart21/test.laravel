@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\API\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\API\OrderApiControllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,12 @@ Route::group([
     'prefix' => 'auth',
 ], function () {
     Route::post('login', [ AuthController::class, 'login' ]);
-    Route::post('registration', [ AuthController::class, 'login' ]);
-    Route::post('logout', [ AuthController::class, 'login' ]);
-    Route::post('refresh', [ AuthController::class, 'login' ]);
-    Route::post('me', [ AuthController::class, 'login' ]);
+//    Route::post('registration', [ AuthController::class, 'login' ]);
+//    Route::post('logout', [ AuthController::class, 'login' ]);
+    Route::post('refresh', [ AuthController::class, 'refresh' ]);
+    Route::post('me', [ AuthController::class, 'me' ]);
+
+    Route::post('orders', [ OrderApiControllers::class, 'orders' ]);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
