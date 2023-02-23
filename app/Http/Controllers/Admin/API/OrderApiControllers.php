@@ -30,10 +30,24 @@ class OrderApiControllers extends Controller
     {
         $pageNum = $request->pageNum;
         $page_size = $request->page_size;
+        $sort = $request->sort;
         // получаем данные по номеру страницы
-        $orders = Order::orderByDesc('date')->paginate($page_size, ['*'], 'page', $pageNum);
+        switch ($sort){
+            case 'date':
+                $orders = Order::orderByDesc('updated_at')->paginate($page_size, ['*'], 'page', $pageNum);
+                break;
+            case 'price_desc':
+                $orders = Order::orderByDesc('total')->paginate($page_size, ['*'], 'page', $pageNum);
+                break;
+            case 'price_asc':
+                $orders = Order::orderBy('total')->paginate($page_size, ['*'], 'page', $pageNum);
+                break;
+            default:
+                $orders = Order::orderByDesc('updated_at')->paginate($page_size, ['*'], 'page', $pageNum);
+        }
         return response()->json([
             'orders'=> $orders,
+            'sort'=> $sort
         ]);
     }
 
