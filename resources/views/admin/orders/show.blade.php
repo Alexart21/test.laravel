@@ -53,12 +53,13 @@
                     <form action="{{ route('orders.destroy', [ $product->id ]) }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger">удалить</button>
+                        <button class="del-bt">@svg('svg/trash-can.svg', 'red-icon')</button>
                     </form>
                 </td>
             </tr>
         @endforeach
         </table>
     @endif
+    <br>
     <a href="{{ route('orders.add', [ $order->id ]) }}" class="btn btn-primary">Добавить товар</a>
 </x-layouts.admin>

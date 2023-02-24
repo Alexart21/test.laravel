@@ -12,3 +12,26 @@
     font-size: 120%;
     margin: 1em;
 }
+
+.red-icon{
+    width: 30px;
+    height: 30px;
+    fill: red;
+}
+.green-icon{
+    width: 30px;
+    height: 30px;
+    fill: mediumseagreen;
+}
+
+.black-icon{
+    width: 30px;
+    height: 30px;
+    fill: #222222;
+}
+
+.del-bt{
+    outline: none !important;
+    border: none !important;
+    background: transparent !important;
+}

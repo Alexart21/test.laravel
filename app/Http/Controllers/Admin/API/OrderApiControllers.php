@@ -28,9 +28,9 @@ class OrderApiControllers extends Controller
 
     public function page(Request $request)
     {
-        $pageNum = $request->pageNum;
-        $page_size = $request->page_size;
-        $sort = $request->sort;
+        $page_size = $request->input('page_size');
+        $pageNum = $request->input('page_num');
+        $sort = $request->input('sort');
         // получаем данные по номеру страницы
         switch ($sort){
             case 'date':
@@ -47,7 +47,7 @@ class OrderApiControllers extends Controller
         }
         return response()->json([
             'orders'=> $orders,
-            'sort'=> $sort
+//            'sort'=> $sort
         ]);
     }
 

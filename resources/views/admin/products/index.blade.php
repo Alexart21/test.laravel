@@ -13,11 +13,11 @@
                     <td>{{ $product->title }}</td>
                     <td>{{ $product->price }}</td>
                     <td>
-                        <a href="{{ route('products.edit', [$product->id]) }}" class="btn btn-success">изменить</a>
+                        <a href="{{ route('products.edit', [$product->id]) }}">@svg('svg/pencil.svg', 'green-icon')</a>
                         <form action="{{ route('products.destroy', [ $product->id ]) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger">удалить</button>
+                            <button class="del-bt">@svg('svg/trash-can.svg', 'red-icon')</button>
                         </form>
                     </td>
                 </tr>

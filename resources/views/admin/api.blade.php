@@ -88,12 +88,19 @@
         let page_size = document.getElementById('orders-count').value;
         let sort = document.getElementById('sort').value;
         let jwt = JSON.parse(localStorage.getItem('jwt'));
-        await fetch('/api/auth/page?pageNum=' + pageNum + '&page_size=' + page_size + '&sort=' + sort, {
+        let url = '/api/auth/page';
+        let data = {
+            page_size: page_size,
+            page_num: pageNum,
+            sort: sort
+        }
+        await fetch(url, {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=utf-8',
                 'Authorization': jwt.token_type + ' ' + jwt.access_token
             },
+            body: JSON.stringify(data)
         })
             .then(response => response.json())
             .then(result => {
@@ -132,6 +139,11 @@
                                 }
                             });
                         });
+                    }
+                }else{
+                    console.log(result);
+                    if(result.message){
+                        resultBlock.innerHTML = `<span class="text-danger">${result.message}</span>`;
                     }
                 }
             })

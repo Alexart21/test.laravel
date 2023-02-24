@@ -1,6 +1,8 @@
 <x-layouts.admin title="Заказы">
 <h2>Заказы</h2>
     <a href="{{ route('orders.create') }}" class="btn btn-primary">создать</a>
+    <br>
+    <br>
     @if($total)
         <table class="admin_tbl">
             <tr>
@@ -10,7 +12,7 @@
                 <th>Email</th>
                 <th>Адрес</th>
                 <th>Сумма</th>
-                <th></th>
+                <th>Действия</th>
             </tr>
         @foreach($orders as $order)
             <tr>
@@ -21,8 +23,8 @@
                 <td>{{ $order->address }}</td>
                 <td>{{ $order->total }}</td>
                 <td>
-                    <a href="{{ route('orders.show', [ $order->id ]) }}" class="btn btn-success">показать</a>
-                    <a href="{{ route('orders.edit', [ $order->id ]) }}" class="btn btn-success">редактировать</a>
+                    <a href="{{ route('orders.show', [ $order->id ]) }}">@svg('svg/eye.svg', 'black-icon')</a>
+                    <a href="{{ route('orders.edit', [ $order->id ]) }}">@svg('svg/pencil.svg', 'green-icon')</a>
                 </td>
             </tr>
         @endforeach
