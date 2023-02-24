@@ -24,6 +24,12 @@
     fill: mediumseagreen;
 }
 
+.blue-icon{
+    width: 30px;
+    height: 30px;
+    fill: blue;
+}
+
 .black-icon{
     width: 30px;
     height: 30px;
@@ -34,4 +40,8 @@
     outline: none !important;
     border: none !important;
     background: transparent !important;
+}
+
+.del-form{
+    display: inline-block !important;
 }

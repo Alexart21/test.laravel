@@ -1,5 +1,6 @@
 <x-layouts.admin title="Товар {{ $product->id }}">
 <h3> {{ $product->title }} </h3>
+    <p>Id: {{ $product->id }}</p>
     <form action="{{ route('products.update', [$product->id]) }}" method="post">
         @csrf
         @method('PUT')

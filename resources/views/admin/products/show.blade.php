@@ -8,11 +8,11 @@
     </div>
     <br>
     <br>
-    <a href="{{ route('products.edit', [$product->id]) }}" class="btn btn-success">изменить</a>
-    <form action="{{ route('products.destroy', [ $product->id ]) }}" method="post">
+    <a href="{{ route('products.edit', [$product->id]) }}">@svg('svg/pencil.svg', 'green-icon')</a>
+    <form action="{{ route('products.destroy', [ $product->id ]) }}" method="post" class="del-form">
         @csrf
         @method('DELETE')
-        <button class="btn btn-danger">удалить</button>
+        <button class="del-bt">@svg('svg/trash-can.svg', 'red-icon')</button>
     </form>
-    <a href="{{ route('products.create') }}" class="btn btn-primary">создать</a>
+{{--    <a href="{{ route('products.create') }}" class="btn btn-primary">создать</a>--}}
 </x-layouts.admin>

@@ -17,8 +17,9 @@
                     <td>{{ $product->title }}</td>
                     <td>{{ $product->price }}</td>
                     <td>
+                        <a href="{{ route('products.show', [ $product->id ]) }}">@svg('svg/eye.svg', 'blue-icon')</a>
                         <a href="{{ route('products.edit', [$product->id]) }}">@svg('svg/pencil.svg', 'green-icon')</a>
-                        <form action="{{ route('products.destroy', [ $product->id ]) }}" method="post">
+                        <form action="{{ route('products.destroy', [ $product->id ]) }}" method="post" class="del-form">
                             @csrf
                             @method('DELETE')
                             <button class="del-bt">@svg('svg/trash-can.svg', 'red-icon')</button>

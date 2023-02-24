@@ -50,7 +50,7 @@
                 <td>{{$product->qty}}</td>
                 <td>{{$product->total}}</td>
                 <td>
-                    <form action="{{ route('orders.destroy', [ $product->id ]) }}" method="post">
+                    <form action="{{ route('orders.destroy', [ $product->id ]) }}" method="post" class="del-form">
                         @csrf
                         @method('DELETE')
                         <button class="del-bt">@svg('svg/trash-can.svg', 'red-icon')</button>
@@ -60,6 +60,5 @@
         @endforeach
         </table>
     @endif
-    <br>
     <a href="{{ route('orders.add', [ $order->id ]) }}" class="btn btn-primary">Добавить товар</a>
 </x-layouts.admin>

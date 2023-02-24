@@ -23,8 +23,14 @@
                 <td>{{ $order->address }}</td>
                 <td>{{ $order->total }}</td>
                 <td>
-                    <a href="{{ route('orders.show', [ $order->id ]) }}">@svg('svg/eye.svg', 'black-icon')</a>
+                    <a href="{{ route('orders.show', [ $order->id ]) }}">@svg('svg/eye.svg', 'blue-icon')</a>
                     <a href="{{ route('orders.edit', [ $order->id ]) }}">@svg('svg/pencil.svg', 'green-icon')</a>
+                    <form action="{{ route('orders.delete', [$order->id]) }}" method="post" class="del-form">
+                        @csrf
+                        @method('DELETE')
+                        <button class="del-bt">@svg('svg/trash-can.svg', 'red-icon')</button>
+                    </form>
+
                 </td>
             </tr>
         @endforeach
