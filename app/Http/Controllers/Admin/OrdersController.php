@@ -17,7 +17,7 @@ class OrdersController extends Controller
 
     public function index()
     {
-        $orders = Order::orderByDesc('date')->paginate(self::PAGE_SIZE);
+        $orders = Order::orderByDesc('id')->paginate(self::PAGE_SIZE);
         $count = $orders->count();
         $total = $orders->total();
         return view('admin.orders.index', compact('orders', 'count', 'total'));

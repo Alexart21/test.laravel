@@ -1,15 +1,19 @@
 <x-layouts.admin title="Товары">
     <h2>Товары</h2>
     <a href="{{ route('products.create') }}" class="btn btn-primary">создать</a>
+    <br>
+    <br>
     @if($total)
         <table class="admin_tbl">
             <tr>
+                <th>Id</th>
                 <th>Наименование</th>
                 <th>Цена</th>
                 <th>Действие</th>
             </tr>
             @foreach($products as $product)
                 <tr>
+                    <td>{{ $product->id }}</td>
                     <td>{{ $product->title }}</td>
                     <td>{{ $product->price }}</td>
                     <td>
@@ -21,7 +25,6 @@
                         </form>
                     </td>
                 </tr>
-                <br>
             @endforeach
         </table>
         <br>

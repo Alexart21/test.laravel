@@ -13,7 +13,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = Product::orderByDesc('title')->paginate(self::PAGE_SIZE);
+        $products = Product::orderByDesc('id')->paginate(self::PAGE_SIZE);
         $count = $products->count();
         $total = $products->total();
         return view('admin.products.index', compact('products', 'count', 'total'));

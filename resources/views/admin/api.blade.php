@@ -12,7 +12,7 @@
     <form id="orders-form" action="" onsubmit="return false">
         <div class="form-group">
             <label for="order-count">Кол-во заказов на странице</label>
-            <input id="orders-count" type="number" min="1" value="1">
+            <input id="orders-count" type="number" min="1" value="20">
             <label for="sort">Сортировка</label>
             <select id="sort" name="sort" >
                 <option selected value="date">по дате создания</option>
