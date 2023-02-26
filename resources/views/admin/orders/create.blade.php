@@ -11,7 +11,8 @@
     }
 </style>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=2937914e-0b30-4ff3-b518-b51947516d27" type="text/javascript"></script>
-<x-layouts.admin title="Новый товар">
+
+<x-layouts.yandex title="Новый товар">
     <h2>Новый заказ</h2>
 <form id="test-form" style="width: 100%" action="{{ route('orders.store') }}" method="post" name="test-form">
     @csrf
@@ -178,4 +179,4 @@
             }
         }
     </script>
-</x-layouts.admin>
+</x-layouts.yandex>

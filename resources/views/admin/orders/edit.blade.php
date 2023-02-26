@@ -11,7 +11,7 @@
     }
 </style>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=2937914e-0b30-4ff3-b518-b51947516d27" type="text/javascript"></script>
-<x-layouts.admin title="Заказ | {{ $order->id }}">
+<x-layouts.yandex title="Заказ | {{ $order->id }}">
     <h2>Заказ {{ $order->id }}</h2>
     <a href="{{ route('orders.add', [ $order->id ]) }}" class="btn btn-success">Добавить товар</a>
     <br>
@@ -52,7 +52,7 @@
         <div id="message"></div>
     </div>
     <button form="test-form" class="btn btn-success">Сохранить</button>
-</x-layouts.admin>
+</x-layouts.yandex>
 <script>
     window.onload = () => {
         // маски ввода

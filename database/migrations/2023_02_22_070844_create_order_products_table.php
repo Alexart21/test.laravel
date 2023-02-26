@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('price');
             $table->integer('qty');
             $table->float('total');
-            $table->foreignIdFor(Order::class);
+            $table->foreignIdFor(Order::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Product::class);
             $table->timestamps();
         });

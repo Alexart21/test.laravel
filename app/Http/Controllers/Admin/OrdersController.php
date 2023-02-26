@@ -76,7 +76,10 @@ class OrdersController extends Controller
             'product' => 'required|string|max:255',
             'qty' => 'required|integer'
         ]);
-        $product = Product::where('title', $data['product'])->firstOrFail();
+        $product = Product::where('title', $data['product'])->first();
+        if(!$product){
+            die('<h1>Нет такого товара. При вводе названия товара пользуйтесь подсказками.</h1>');
+        }
         $order = Order::findOrFail($data['order_id']);
 
         $orderProduct = new OrderProduct();
