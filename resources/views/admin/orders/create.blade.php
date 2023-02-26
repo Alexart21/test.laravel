@@ -12,13 +12,13 @@
 </style>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=2937914e-0b30-4ff3-b518-b51947516d27" type="text/javascript"></script>
 
-<x-layouts.yandex title="Новый товар">
+<x-layouts.yandex title="Новый заказ">
     <h2>Новый заказ</h2>
 <form id="test-form" style="width: 100%" action="{{ route('orders.store') }}" method="post" name="test-form">
     @csrf
     <h2>Введите персональные данные</h2>
     <div class="form-group">
-        <label for="date">Дата вида 01.02.2023</label>
+        <label for="date">Дата <small>(вида 01.02.2023)</small></label>
         <input id="date" class="form-control @error('date') is-invalid @enderror" type="text" name="date" value="{{ old('date') }}">
         @error('date')<div class="text-danger">{{ $message }}</div>@enderror
     </div>

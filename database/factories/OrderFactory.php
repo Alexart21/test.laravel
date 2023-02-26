@@ -19,7 +19,7 @@ class OrderFactory extends Factory
     {
         $array = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
         return [
-            'date' => rand(0, 2) . rand(1, 9) . '.' . Arr::random($array) . '.' .rand(2018, 2022),
+            'date' => rand(0, 2) . rand(1, 9) . '.' . Arr::random($array) . '.' .rand(2017, 2022),
             'phone' => fake('ru')->phoneNumber(),
             'email' => fake()->email(),
             'address' => fake()->address(),

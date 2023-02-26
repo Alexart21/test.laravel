@@ -26,12 +26,6 @@
     <br>
     @if($order->total <= 0)
         <h4>Товаров в заказе нет</h4>
-        <form action="{{ route('orders.delete', [$order->id]) }}" method="post">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-danger">удалить заказ</button>
-        </form>
-        <br>
     @else
         <h4>Товары в заказе (условная корзина)</h4>
         <table class="admin_tbl">
@@ -60,5 +54,18 @@
         @endforeach
         </table>
     @endif
-    <a href="{{ route('orders.add', [ $order->id ]) }}" class="btn btn-primary">Добавить товар</a>
+    <br>
+    <div class="d-flex">
+        <div>
+            <a href="{{ route('orders.add', [ $order->id ]) }}" class="btn btn-primary">Добавить товар</a>
+        </div>
+        &nbsp;&nbsp;
+        <form action="{{ route('orders.delete', [$order->id]) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger">удалить заказ</button>
+        </form>
+    </div>
+
+
 </x-layouts.admin>

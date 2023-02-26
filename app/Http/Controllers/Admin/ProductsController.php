@@ -9,7 +9,7 @@ use App\Http\Requests\Admin\ProductFormRequest;
 
 class ProductsController extends Controller
 {
-    const PAGE_SIZE = 10;
+    const PAGE_SIZE = 20;
 
     public function index()
     {

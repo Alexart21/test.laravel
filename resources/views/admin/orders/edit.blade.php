@@ -21,7 +21,7 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="date">Дата вида 01.02.2023</label>
+            <label for="date">Дата <small>(вида 01.02.2023)</small></label>
             <input id="date" class="form-control @error('date') is-invalid @enderror" type="text" name="date" value="{{ $order->date }}">
             @error('date')<div class="text-danger">{{ $message }}</div>@enderror
         </div>

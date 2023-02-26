@@ -1,5 +1,9 @@
 <x-layouts.admin title="API test">
     <h3>Create test</h3>
+    здесь яндекс карты не подключал (только в обычном добавлении/редактировании)<br>
+    масок ввода тоже нет все есть здесь <a href="{{ route('orders.create') }}">create order</a>
+    <br>
+    <br>
     <div id="loader" class="text-success">загрузка...</div>
     <div id="succes-block" class="alert alert-success" role="alert" style="display: none;"></div>
     <div id="error-block" class="alert alert-danger" role="alert" style="display: none;"></div>
