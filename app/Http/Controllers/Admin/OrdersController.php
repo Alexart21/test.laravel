@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\OrderFormRequest;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrdersController extends Controller
 {
@@ -78,7 +79,7 @@ class OrdersController extends Controller
         ]);
         $product = Product::where('title', $data['product'])->first();
         if(!$product){
-            die('<h1>Нет такого товара. При вводе названия товара пользуйтесь подсказками.</h1>');
+            abort(404, 'Нет такого товара. При вводе названия товара пользуйтесь живыми подсказками.');
         }
         $order = Order::findOrFail($data['order_id']);
 
