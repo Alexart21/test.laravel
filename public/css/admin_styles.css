@@ -45,3 +45,19 @@
 .del-form{
     display: inline-block !important;
 }
+
+.api-main{
+    display: flex;
+}
+
+.left, .right{
+    /*width: 50%;*/
+}
+
+.left{
+    width: 700px;
+}
+
+#loader{
+    display: none;
+}

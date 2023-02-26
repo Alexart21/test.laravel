@@ -25,8 +25,11 @@ Route::group([
     Route::post('refresh', [ AuthController::class, 'refresh' ]);
     Route::post('me', [ AuthController::class, 'me' ]);
 
-    Route::post('orders', [ OrderApiControllers::class, 'orders' ]);
+    Route::post('show', [ OrderApiControllers::class, 'show' ]);
     Route::post('page', [ OrderApiControllers::class, 'page' ]);
+    Route::post('create', [ OrderApiControllers::class, 'create' ])->name('api.create');
+    Route::post('update', [ OrderApiControllers::class, 'update' ])->name('api.update');
+    Route::delete('destroy', [ OrderApiControllers::class, 'destroy' ]);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

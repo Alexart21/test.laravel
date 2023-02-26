@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\API;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ApiOrderUpdate;
 
 class OrderApiControllers extends Controller
 {
@@ -14,15 +15,12 @@ class OrderApiControllers extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'registration']]);
     }
 
-    public function orders(Request $request)
+    public function show(Request $request)
     {
-        $page_size = $request->page_size;
-        $orders = Order::orderByDesc('date')->paginate($page_size);
-        $count = $orders->count();
-        $total = $orders->total();
+        $id = $request->id;
+        $order = Order::findOrFail($id);
         return response()->json([
-            'orders'=> $orders,
-            'page_size' => $page_size
+            'order'=>$order,
         ]);
     }
 
@@ -48,6 +46,39 @@ class OrderApiControllers extends Controller
         return response()->json([
             'orders'=> $orders,
 //            'sort'=> $sort
+        ]);
+    }
+
+    public function update(ApiOrderUpdate $request)
+    {
+        $data = $request->validated();
+        $id = $request->id;
+        $order = Order::findOrFail($id);
+        $order->update($data);
+        return response()->json([
+            'success'=> true,
+            'id'=> $id
+        ]);
+    }
+
+    public function create(ApiOrderUpdate $request)
+    {
+        $data = $request->validated();
+        $order = Order::create($data);
+        return response()->json([
+            'success'=> true,
+            'id'=> $order->id
+        ]);
+    }
+
+    public function destroy(Request $request)
+    {
+        $id = $request->input('id');
+        $order = Order::findOrFail($id);
+        $order->delete();
+        return response()->json([
+            'success'=> true,
+            'id'=> $id
         ]);
     }
 

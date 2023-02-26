@@ -19,4 +19,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'can:adm
     Route::resource('/orders', OrdersController::class)->parameters('id')->whereNumber(['id']);
 
     Route::get('api-test', [ DefaultController::class, 'api' ])->name('admin.api');
+    Route::get('api-create', [ DefaultController::class, 'create' ])->name('admin.api.create');
+    Route::get('api-update', [ DefaultController::class, 'update' ])->name('admin.api.udate');
 });

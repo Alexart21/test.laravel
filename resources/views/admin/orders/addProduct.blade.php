@@ -7,7 +7,7 @@
         @csrf
         <input type="hidden" name="order_id" value="{{ $order->id }}">
     <div class="form-group">
-        <label for="product">Начните вводить название товара</label>
+        <label for="product">Начните вводить название товара из имеющихся в наличии</label>
         <input id="product" list="product_list" class="form-control"  type="text" name="product">
         <datalist id="product_list">
         </datalist>

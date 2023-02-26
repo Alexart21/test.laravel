@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         // простой шлюз
         Gate::define('admin', function ($user) {
-            return strtolower(auth()->user()->name) === 'admin';
+            return strtolower(auth()->user()->name) === env('ADMIN_NAME');
         });
     }
 }
