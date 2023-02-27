@@ -43,6 +43,7 @@ class OrdersController extends Controller
         return redirect()->route('orders.add', ['id' => $order->id]);
     }
 
+    // страница добавления товара к имеющемуся заказу
     public function add(Request $request)
     {
         $id = (int)$request->id;
@@ -50,6 +51,7 @@ class OrdersController extends Controller
         return view('admin.orders.addProduct', compact('order'));
     }
 
+    // живой поиск по наименованию товара
     public function search(Request $request)
     {
         $product = trim($request->product);
@@ -70,6 +72,7 @@ class OrdersController extends Controller
         }
     }
 
+    // сохранение добавленного товара в таблицу oredr_products и перерасчет итоговых сумм
     public function save(Request $request)
     {
         $data = $request->validate([
@@ -78,24 +81,30 @@ class OrdersController extends Controller
             'qty' => 'required|integer'
         ]);
         $product = Product::where('title', $data['product'])->first();
-        if(!$product){
+        if (!$product) {
             abort(404, 'Нет такого товара. При вводе названия товара пользуйтесь живыми подсказками.');
         }
-        $order = Order::findOrFail($data['order_id']);
+        try {
+            DB::beginTransaction();
+            $order = Order::findOrFail($data['order_id']);
+            $orderProduct = new OrderProduct();
+            $orderProduct->title = $product->title;
+            $orderProduct->price = $product->price;
+            $orderProduct->qty = $orderProduct->qty + $data['qty'];
+            $orderProduct->total = $orderProduct->total + $orderProduct->price * $orderProduct->qty;
+            $orderProduct->order_id = $data['order_id'];
+            $orderProduct->product_id = $product->id;
+            $orderProduct->save();
+            $order->total = $order->total + $orderProduct->total;
+            $order->save();
+            DB::commit();
 
-        $orderProduct = new OrderProduct();
-        $orderProduct->title = $product->title;
-        $orderProduct->price = $product->price;
-        $orderProduct->qty = $orderProduct->qty + $data['qty'];
-        $orderProduct->total = $orderProduct->total + $orderProduct->price * $orderProduct->qty;
-        $orderProduct->order_id = $data['order_id'];
-        $orderProduct->product_id = $product->id;
-        $orderProduct->save();
+            return view('admin.orders.addProduct', compact('order'));
+        } catch (Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+        }
 
-        $order->total = $order->total + $orderProduct->total;
-        $order->save();
-
-        return view('admin.orders.addProduct', compact('order'));
     }
 
     /**
@@ -130,15 +139,17 @@ class OrdersController extends Controller
         return redirect()->route('orders.show', [$id]);
     }
 
-    // удаление товара из заказа
+    // удаление товара из заказа и перерасчет итоговой суммы
+    // Сам заказ здесь не удаляется !
     public function destroy(string $id)
     {
-//        dd($id);
         $orderProduct = OrderProduct::findOrFail($id);
         try {
             DB::beginTransaction();
             $order = $orderProduct->order;
+
             $deleted_sum = $orderProduct->total;
+
             $orderProduct->delete();
             $order->total = $order->total - $deleted_sum;
             $order->save();
@@ -150,7 +161,8 @@ class OrdersController extends Controller
         }
     }
 
-    // удаление заказа
+    // удаление заказа ( каскадно удаляются все добавленные товары из order_products если есть )
+    //
     public function delete(string $id)
     {
         $order = Order::findOrFail($id);
