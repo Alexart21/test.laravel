@@ -25,14 +25,15 @@
             loaderStop(loader);
            return;
         }
-        let formData = new FormData(form);
+        // данные из формы в объект
+        const formData = Object.fromEntries(new FormData(form).entries());
         let response = await fetch("{{ route('api.update') }}", {
             method: 'POST',
             headers: {
-                // 'Content-Type': 'application/json;charset=utf-8',
+                'Content-Type': 'application/json;charset=utf-8',
                 'Authorization': jwt.token_type + ' ' + jwt.access_token
             },
-            body: formData
+            body: JSON.stringify(formData)
         });
         if (response.redirected) { // если чето не так с токеном laravel может бросить на страницу логина
             loaderStop(loader);

@@ -22,6 +22,7 @@ window.onload = () => {
         });
     }
 }
+
 // очиска всех сообщений
 function clearMsgs(){
     let errs = document.querySelectorAll('.err-msg'); // это в компоненте формы ошибки валидации

@@ -57,7 +57,7 @@ class OrderApiControllers extends Controller
         $order->update($data);
         return response()->json([
             'success'=> true,
-            'id'=> $id
+            'id'=> $order->id
         ]);
     }
 
