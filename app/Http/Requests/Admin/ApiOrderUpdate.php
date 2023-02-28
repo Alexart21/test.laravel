@@ -22,7 +22,7 @@ class ApiOrderUpdate extends FormRequest
     {
         return [
             'date' => 'required|string|max:10|',
-            'phone' => 'required',
+            'phone' => 'string|max:18',
             'email' => 'required|email',
             'address' => 'required|max:255'
         ];

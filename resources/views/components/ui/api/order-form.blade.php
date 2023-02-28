@@ -6,7 +6,7 @@
     'address'
 ])
 <form id="test-form" action="" method="post" name="test-form">
-    @method('POST')
+{{--    @method('POST')--}}
     <input type="hidden" name="id" value="{{ $id }}">
     <div class="form-group">
         <label for="date">Дата вида 01.02.2023</label>
