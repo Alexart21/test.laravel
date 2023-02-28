@@ -21,9 +21,8 @@ class ApiOrderUpdate extends FormRequest
     public function rules(): array
     {
         return [
-//            'id' => 'required|integer',
-            'date' => 'required|string|min:10|max:10|',
-            'phone' => 'string|max:18',
+            'date' => ['required', 'string', 'min:10', 'max:10', 'regex:/[0-3][0-9][\.][0-1][0-9][\.][2][0][0-9][0-9]/'],
+            'phone' => ['max:18', 'regex:/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/'],
             'email' => 'required|email',
             'address' => 'required|max:255'
         ];

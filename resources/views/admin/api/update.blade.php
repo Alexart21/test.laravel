@@ -28,7 +28,7 @@
         // данные из формы в объект
         const formData = Object.fromEntries(new FormData(form).entries());
         let response = await fetch("{{ route('api.update') }}", {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
                 'Authorization': jwt.token_type + ' ' + jwt.access_token

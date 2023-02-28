@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\API\OrderApiControllers;
 Route::group([
     'prefix' => 'auth',
 ], function () {
-    Route::post('login', [ AuthController::class, 'login' ]);
+//    Route::post('login', [ AuthController::class, 'login' ]);
 //    Route::post('registration', [ AuthController::class, 'login' ]);
 //    Route::post('logout', [ AuthController::class, 'login' ]);
     Route::post('refresh', [ AuthController::class, 'refresh' ]);
@@ -28,7 +28,7 @@ Route::group([
     Route::post('show', [ OrderApiControllers::class, 'show' ]);
     Route::post('page', [ OrderApiControllers::class, 'page' ]);
     Route::post('create', [ OrderApiControllers::class, 'create' ])->name('api.create');
-    Route::post('update', [ OrderApiControllers::class, 'update' ])->name('api.update');
+    Route::put('update', [ OrderApiControllers::class, 'update' ])->name('api.update');
     Route::delete('destroy', [ OrderApiControllers::class, 'destroy' ]);
 });
 
