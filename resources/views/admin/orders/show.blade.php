@@ -1,3 +1,6 @@
+@php
+    use Jenssegers\Date\Date;
+@endphp
 <x-layouts.admin title="">
     <h2>Заказ № {{ $order->id }}</h2>
     @include('flash::message')
@@ -8,6 +11,7 @@
             <th>Телефон</th>
             <th>Email</th>
             <th>Адрес</th>
+            <th>Дата</th>
             @if($order->total)
             <th>Итог</th>
             @endif
@@ -18,6 +22,17 @@
             <td>{{ $order->phone }}</td>
             <td>{{ $order->email }}</td>
             <td>{{ $order->address}}</td>
+            @php
+                $date = Date::parse($order->created_at);
+            if($date->isYesterday()){
+                $date = 'вчера в ' . $date->format('H:i');
+            }elseif ($date->isToday()){
+                $date = 'сегодня в ' . $date->format('H:i');
+            }else{
+                $date = $date->format('j F Y H:i');
+            }
+            @endphp
+            <td>{{ $date }}</td>
             @if($order->total > 0)
             <td>{{ $order->total }}</td>
             @endif
