@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use DOMDocument;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        /*DB::beforeExecuting(function($query){
+            echo  "<pre>$query</pre>";
+        });*/
+
         Blade::directive('svg', function ($arguments) {
             try {
                 // Funky madness to accept multiple arguments into the directive

@@ -37,7 +37,7 @@
                 <th>Действие</th>
             </tr>
 
-        @foreach($products as $product)
+        @foreach($order->orderProducts as $product)
             <tr>
                 <td>{{$product->title}}</td>
                 <td>{{$product->price}}</td>
@@ -60,7 +60,7 @@
             <a href="{{ route('orders.add', [ $order->id ]) }}" class="btn btn-primary">Добавить товар</a>
         </div>
         &nbsp;&nbsp;
-        <form action="{{ route('orders.delete', [$order->id]) }}" method="post">
+        <form action="{{ route('orders.delete', [$order->id]) }}" method="post" class="del-form">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger">удалить заказ</button>

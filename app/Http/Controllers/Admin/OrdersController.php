@@ -112,9 +112,13 @@ class OrdersController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::findOrFail($id);
+        /*
+         $order = Order::findOrFail($id);
         $products = $order->orderProducts()->orderByDesc('created_at')->get();
-        return view('admin.orders.show', compact('order', 'products'));
+        */
+        // или в одну строчку и одну переменную
+        $order = Order::with('orderProducts')->findOrFail($id);
+        return view('admin.orders.show', compact('order'));
     }
 
     /**
