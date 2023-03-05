@@ -82,7 +82,8 @@ class OrdersController extends Controller
         ]);
         $product = Product::where('title', $data['product'])->first();
         if (!$product) {
-            abort(404, 'Нет такого товара. При вводе названия товара пользуйтесь живыми подсказками.');
+            abort(404, 'Нет такого товара. При вводе пользуйтесь живыми подсказками.');
+//            abort(404);
         }
         try {
             DB::beginTransaction();

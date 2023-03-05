@@ -1,5 +1,6 @@
-<h2 style="text-align: center">{{ $exception->getMessage() }}</h2>
+{{--{{ dump($exception) }}--}}
+{{--{{ $exception->getMessage() }}--}}
 @extends('errors::minimal')
 @section('title', __('Not Found'))
 @section('code', '404')
-@section('message', __('Not Found'))
+@section('message',  $exception->getMessage() )
