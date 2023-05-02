@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();;
             $table->string('email', 255);
             $table->string('address', 255);
+            $table->float('latitude', 11, 8)->nullable();
+            $table->float('longitude', 11, 8)->nullable();
             $table->float('total')->nullable();
             $table->timestamps();
         });

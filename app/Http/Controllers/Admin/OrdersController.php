@@ -11,6 +11,8 @@ use App\Http\Requests\Admin\OrderFormRequest;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Listeners\OrderListener;
+use App\Events\NewOrder;
 
 class OrdersController extends Controller
 {
@@ -18,6 +20,7 @@ class OrdersController extends Controller
 
     public function index()
     {
+//        NewOrder::dispatch();
         $orders = Order::orderByDesc('id')->paginate(self::PAGE_SIZE);
         $count = $orders->count();
         $total = $orders->total();
@@ -37,7 +40,6 @@ class OrdersController extends Controller
      */
     public function store(OrderFormRequest $request)
     {
-//        die('here');
         $data = $request->validated();
         $order = Order::create($data);
         return redirect()->route('orders.add', ['id' => $order->id]);
@@ -55,11 +57,7 @@ class OrdersController extends Controller
     public function search(Request $request)
     {
         $product = trim($request->product);
-        $result = DB::table('products')
-            ->where('title', 'LIKE', '%' . $product . '%')
-            ->get()
-            ->toArray();
-//        $count = $result->count();
+        $result = Product::where('title', 'LIKE', '%' . $product . '%')->get()->toArray();
         if ($result) {
             return response()->json([
                 'success' => true,
@@ -85,6 +83,7 @@ class OrdersController extends Controller
             abort(404, 'Нет такого товара. При вводе пользуйтесь живыми подсказками.');
 //            abort(404);
         }
+        // event(new NewOrder($product));
         try {
             DB::beginTransaction();
             $order = Order::findOrFail($data['order_id']);

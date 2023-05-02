@@ -15,6 +15,8 @@ class Order extends Model
         'phone',
         'email',
         'address',
+        'latitude',
+        'longitude',
         'total'
     ];
 

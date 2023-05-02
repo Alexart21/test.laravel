@@ -10,7 +10,7 @@
         width: 100% !important;
     }
 </style>
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=2937914e-0b30-4ff3-b518-b51947516d27" type="text/javascript"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey={{ config('yandex.api_key') }}" type="text/javascript"></script>
 
 <x-layouts.yandex title="Новый заказ">
     <h2>Новый заказ</h2>
@@ -41,6 +41,8 @@
         @error('address')<div class="text-danger">{{ $message }}</div>@enderror
         <span class="btn"  id="button">Проверить</span>
     </div>
+    <input type="hidden" name="latitude" id="latitude">
+    <input type="hidden" name="longitude" id="longitude">
 </form>
     <p id="notice">Адрес не найден</p>
     <div id="map"></div>
@@ -119,6 +121,15 @@
 
             }
             function showResult(obj) {
+                console.log('here');
+                console.log(obj.geometry._coordinates);
+                // добавляем в форму координаты
+                let latitude = document.getElementById('latitude');
+                let longitude = document.getElementById('longitude');
+                latitude.value = obj.geometry._coordinates[0];
+                longitude.value = obj.geometry._coordinates[1];
+                console.log('here2')
+                console.log(latitude.value)
                 // Удаляем сообщение об ошибке, если найденный адрес совпадает с поисковым запросом.
                 $('#suggest').removeClass('input_error');
                 $('#notice').css('display', 'none');

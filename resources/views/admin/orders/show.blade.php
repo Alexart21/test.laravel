@@ -70,6 +70,56 @@
         </table>
     @endif
     <br>
+    @if($order->latitude)
+        <style>
+            #map {
+                width: 100%;
+                height: 400px;
+            }
+        </style>
+        <div id="map"></div>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey={{ config('yandex.api_key') }}" type="text/javascript"></script>
+        <script>
+            ymaps.ready(init);
+
+            function init() {
+                let myMap = new ymaps.Map("map", {
+                        // Координаты центра карты.
+                        // Порядок по умолчанию: «долгота, широта».
+                        center: [{{ $order->latitude }}, {{ $order->longitude }}],
+                        zoom: 17
+                    }, {
+                        // searchControlProvider: 'yandex#search'
+                    }),
+
+                    // Создаем геообъект с типом геометрии "Точка".
+                    myGeoObject = new ymaps.GeoObject({
+                        // Описание геометрии.
+                        geometry: {
+                            type: "Point",
+                            //деревня
+                            coordinates: [{{ $order->latitude }}, {{ $order->longitude }}]
+                        },
+                        // Свойства.
+                        properties: {
+                            // Контент метки.
+                            iconContent: '',
+                            // hintContent: 'Ну давай уже тащи'
+                        },
+                    }, {
+                        // Опции.
+                        // Иконка метки будет растягиваться под размер ее содержимого.
+                        preset: 'islands#blackStretchyIcon',
+                        // Метку можно перемещать.
+                        // draggable: true,
+                        strokeColor: "#00ff00"
+                    });
+                myMap.geoObjects
+                    .add(myGeoObject)
+            }
+
+        </script>
+    @endif
     <div class="d-flex">
         <div>
             <a href="{{ route('orders.add', [ $order->id ]) }}" class="btn btn-primary">Добавить товар</a>

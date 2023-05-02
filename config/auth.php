@@ -12,6 +12,9 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
+    // это в шлюзе затык вместо использования ролей
+    'admin_name' => env('ADMIN_NAME'),
+    'admin_email' => env('ADMIN_EMAIL'),
 
     'defaults' => [
         'guard' => 'web',
